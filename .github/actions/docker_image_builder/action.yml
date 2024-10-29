@@ -67,9 +67,10 @@ runs:
           docker run --rm -w /opt/otobo_install/otobo_next --entrypoint /bin/bash $otobo_ref -c "more git-repo.txt git-branch.txt git-commit.txt RELEASE | cat"
 
       -
-        # finally upload to DockerHub
+        # finally upload to DockerHub - without latest update
         # the built image is already available in the job
         name: Push to DockerHub
+        if:   ${{ matrix.latest != true }}
         uses: docker/build-push-action@v6
         with:
           push: true
@@ -88,10 +89,10 @@ runs:
           cache-to: type=gha,mode=max
 
       -
-        # finally finally update latest tag
+        # finally upload to DockerHub - with latest update
         # the built image is already available in the job
-        name: Update latest-10_0
-        if:   ${{ matrix.latest }}
+        name: Push to DockerHub (latest)
+        if:   ${{ matrix.latest == true }}
         uses: docker/build-push-action@v6
         with:
           push: true
@@ -104,29 +105,7 @@ runs:
             GIT_REPO=${{ github.repositoryUrl }}
             GIT_BRANCH=${{ env.otobo_branch }}
             GIT_COMMIT=${{ env.otobo_commit }}
-          tags: "${{ matrix.repository }}:latest-10_0"
-          target: ${{ matrix.target }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-
-      -
-        # finally finally update latest tag
-        # the built image is already available in the job
-        name: Update latest
-        if:   ${{ matrix.latest }}
-        uses: docker/build-push-action@v6
-        with:
-          push: true
-          context: ${{ matrix.context }}
-          file: ${{ matrix.dockerfile }}
-          pull: true
-          build-args: |
-            BUILD_DATE=${{ env.otobo_build_date }}
-            DOCKER_TAG=${{ env.otobo_docker_tag }}
-            GIT_REPO=${{ github.repositoryUrl }}
-            GIT_BRANCH=${{ env.otobo_branch }}
-            GIT_COMMIT=${{ env.otobo_commit }}
-          tags: "${{ matrix.repository }}:latest"
+          tags: ${{ env.otobo_ref }},"${{ matrix.repository }}:latest","${{ matrix.repository }}:latest-10_0","${{ matrix.repository }}:latest-10_0-autobuild"
           target: ${{ matrix.target }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
