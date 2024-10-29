@@ -100,11 +100,11 @@ runs:
           pull: true
           build-args: |
             BUILD_DATE=${{ env.otobo_build_date }}
-            DOCKER_TAG='latest-10_1'
+            DOCKER_TAG=${{ env.otobo_docker_tag }}
             GIT_REPO=${{ github.repositoryUrl }}
             GIT_BRANCH=${{ env.otobo_branch }}
             GIT_COMMIT=${{ env.otobo_commit }}
-          tags: ${{ env.otobo_ref }}
+          tags: "${{ matrix.repository }}:latest-10_1"
           target: ${{ matrix.target }}
           cache-from: type=gha
           cache-to: type=gha,mode=max`
