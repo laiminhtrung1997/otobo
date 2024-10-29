@@ -55,7 +55,7 @@ runs:
           tags: ${{ env.otobo_ref }}
           target: ${{ matrix.target }}
           cache-from: type=gha
-          cache-to: type=gha,mode=max`
+          cache-to: type=gha,mode=max
 
       -
         # Show some files in the image just to check sanity.
@@ -85,7 +85,7 @@ runs:
           tags: ${{ env.otobo_ref }}
           target: ${{ matrix.target }}
           cache-from: type=gha
-          cache-to: type=gha,mode=max`
+          cache-to: type=gha,mode=max
 
       -
         # finally finally update latest tag
@@ -107,7 +107,7 @@ runs:
           tags: "${{ matrix.repository }}:latest-10_0"
           target: ${{ matrix.target }}
           cache-from: type=gha
-          cache-to: type=gha,mode=max`
+          cache-to: type=gha,mode=max
 
       -
         # finally finally update latest tag
@@ -129,4 +129,4 @@ runs:
           tags: "${{ matrix.repository }}:latest"
           target: ${{ matrix.target }}
           cache-from: type=gha
-          cache-to: type=gha,mode=max`
+          cache-to: type=gha,mode=max
