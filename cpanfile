@@ -196,6 +196,9 @@ feature 'devel:test', 'Modules for running the test suite' => sub {
     # support for formatting test results
     requires 'Unicode::GCString';
 
+    # show diff when comparing strings
+    requires 'Test::Differences', '>= 0.64';
+
 };
 
 feature 'div:bcrypt', 'Support for feature div:bcrypt' => sub {
@@ -438,6 +441,9 @@ feature 'optional', 'Support for feature optional' => sub {
 
     # module for manipulating .po entries
     requires 'Locale::PO';
+
+    # show diff when comparing strings
+    requires 'Test::Differences', '>= 0.64';
 
     # language packs from the CLDR project
     requires 'Locale::CLDR::Locales::Ar', '== 0.44.1';
