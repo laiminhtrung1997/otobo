@@ -223,7 +223,7 @@ my %FeatureDescription = (
     'gazelle'           => 'Required packages if you want to use Gazelle webserver',
     'mail'              => 'Features enabling communication with a mail-server',
     'performance:redis' => 'Modules for running with Redis Cache Server',
-    'storage:s3'      => 'AWS S3 compatible storage',
+    'storage:s3'        => 'AWS S3 compatible storage',
     'zzznone'           => 'Uncategorized',
 );
 
